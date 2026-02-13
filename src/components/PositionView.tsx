@@ -20,6 +20,7 @@ interface PositionViewStateProps {
     refView: React.RefObject<HTMLDivElement>;
     onLayoutChange: (rectangle: LayoutRectangle, fromLayoutEffect: boolean) => void;
     children: React.ReactNode;
+    stickyHeaderConfig?: StickyHeaderConfig;
 }
 
 // biome-ignore lint/nursery/noShadow: const function name shadowing is intentional
@@ -28,6 +29,7 @@ const PositionViewState = typedMemo(function PositionViewState({
     horizontal,
     style,
     refView,
+    stickyHeaderConfig,
     ...props
 }: PositionViewStateProps) {
     const [position = POSITION_OUT_OF_VIEW] = useArr$([`containerPosition${id}`]);
