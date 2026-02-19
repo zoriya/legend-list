@@ -49,14 +49,14 @@ const ContainersInner = typedMemo(function ContainersInner({ horizontal, numColu
                 style.marginTop = style.marginBottom = -gapY / 2;
             }
             if (gapX) {
-                style.marginRight = -gapX;
+                style.marginRight = -gapX / 2;
             }
         } else {
             if (gapX) {
-                style.marginLeft = style.marginRight = -gapX;
+                style.marginLeft = style.marginRight = -gapX / 2;
             }
             if (gapY) {
-                style.marginBottom = -gapY;
+                style.marginBottom = -gapY / 2;
             }
         }
     }
