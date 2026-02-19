@@ -38,9 +38,9 @@ const ContainersInner = typedMemo(function ContainersInner({ horizontal, numColu
         ? { minHeight: otherAxisSize, position: "relative", width: totalSize }
         : { height: totalSize, minWidth: otherAxisSize, position: "relative" };
 
-    if (columnWrapperStyle && numColumns > 1) {
+    if (columnWrapperStyle) {
         // Extract gap properties from columnWrapperStyle if available
-        const { columnGap, rowGap, gap } = columnWrapperStyle;
+        const { columnGap, rowGap, gap, ...rest } = columnWrapperStyle;
 
         const gapX = columnGap || gap || 0;
         const gapY = rowGap || gap || 0;
@@ -58,6 +58,14 @@ const ContainersInner = typedMemo(function ContainersInner({ horizontal, numColu
             if (gapY) {
                 style.marginBottom = -gapY / 2;
             }
+        }
+
+        if (Object.keys(rest).length > 0) {
+            return (
+                <div ref={ref} style={style}>
+                    <div style={{ position: "relative", ...rest }}>{children}</div>
+                </div>
+            );
         }
     }
 

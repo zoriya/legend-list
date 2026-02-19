@@ -1,12 +1,12 @@
 // biome-ignore lint/style/useImportType: Leaving this out makes it crash in some environments
 import * as React from "react";
-import { Animated, type ViewStyle } from "react-native";
+import { Animated, View, type ViewStyle } from "react-native";
 
 import { Container } from "@/components/Container";
 import { IsNewArchitecture } from "@/constants-platform";
 import { useValue$ } from "@/hooks/useValue$";
 import { useArr$, useStateContext } from "@/state/state";
-import { type GetRenderedItem, StickyHeaderConfig, typedMemo } from "@/types";
+import { type GetRenderedItem, type StickyHeaderConfig, typedMemo } from "@/types";
 
 interface ContainersProps<ItemT> {
     horizontal: boolean;
@@ -68,7 +68,7 @@ export const Containers = typedMemo(function Containers<ItemT>({
 
     if (columnWrapperStyle) {
         // Extract gap properties from columnWrapperStyle if available
-        const { columnGap, rowGap, gap } = columnWrapperStyle;
+        const { columnGap, rowGap, gap, ...rest } = columnWrapperStyle;
 
         const gapX = columnGap || gap || 0;
         const gapY = rowGap || gap || 0;
@@ -86,6 +86,14 @@ export const Containers = typedMemo(function Containers<ItemT>({
             if (gapY) {
                 style.marginBottom = -gapY / 2;
             }
+        }
+
+        if (Object.keys(rest).length > 0) {
+            return (
+                <Animated.View style={style}>
+                    <View style={rest}>{containers}</View>
+                </Animated.View>
+            );
         }
     }
 

@@ -416,11 +416,11 @@ export interface MaintainScrollAtEndOptions {
     onDataChange?: boolean;
 }
 
-export interface ColumnWrapperStyle {
+export type ColumnWrapperStyle = {
     rowGap?: number;
     gap?: number;
     columnGap?: number;
-}
+} & ViewStyle;
 
 export interface LegendListMetrics {
     headerSize: number;
